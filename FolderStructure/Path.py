@@ -6,6 +6,7 @@ class Path():
         self.repo = repo
         self.path = path
         self.name = os.path.basename(path)
+        self.children = []
 
     def set_path_history(self):
         self.path_history = []
@@ -20,5 +21,18 @@ class Path():
             self.reduce_level(new_path_tail)
 
     def set_indented_string(self):
-        indent = self.level * self.repo.space
-        self.indented_string = f"{indent}{self.name}"
+        pre_indent = self.level * self.repo.space
+        self.indented_string = f"{pre_indent}{self.name}"
+
+    def update_indented_strings(self):
+        post_indent_width = self.repo.max_name_width - len(self.indented_string)
+        post_indent = post_indent_width * " " + self.repo.space
+        self.indented_string = f"{self.indented_string}{post_indent}"
+        for child in self.children:
+            child.update_indented_strings()
+
+    def output_statistics(self, statistic_group_name, statistics_file):
+        statistics_file.writelines(f"{self.indented_string}")
+        for statistic in self.statistic_groups[statistic_group_name].statistics:
+            statistics_file.writelines(statistic.output_string)
+        statistics_file.writelines("\n")

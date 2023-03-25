@@ -30,11 +30,11 @@ class File(Path):
 
     def generate_statistic_group(self, group_class):
         statistic_group = group_class(self)
-        statistic_group.generate_from_file()
+        statistic_group.generate_for_file()
         return statistic_group
 
-    def write_to_statistics_file(self, statistics_file):
-        statistics_file.writelines(f"{self.indented_string}\n")
+    def write_to_statistics_file(self, statistic_group_name, statistics_file):
+        self.output_statistics(statistic_group_name, statistics_file)
 
     def __str__(self):
         string = f"Path: {self.path}, Level: {self.level}"

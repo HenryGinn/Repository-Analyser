@@ -10,18 +10,20 @@ class StatisticsGroup():
         self.statistics = []
         self.statistic_names = []
 
-    def generate_from_file(self):
+    def generate_for_file(self):
         self.file_contents = self.path_obj.file_contents
         self.generate_statistics()
         self.set_statistic_names()
+        self.set_output_values()
 
     def set_statistic_names(self):
         self.statistic_names = [statistic.name for statistic in self.statistics]
 
-    def generate_from_folder(self, group_name):
+    def generate_for_folder(self, group_name):
         self.set_statistic_functions_type_dict()
         statistics_dict = self.get_statistics_dict(group_name)
         self.set_statistics_from_statistics_dict(statistics_dict)
+        self.set_output_values()
 
     def set_statistic_functions_type_dict(self):
         self.statistic_functions_type_dict = {"Sum": self.get_statistic_sum,
@@ -33,13 +35,13 @@ class StatisticsGroup():
         return statistics_dict
 
     def initialise_statistics_dict(self, group_name):
-        statistics_list = self.path_obj.files[0].statistic_groups[group_name].statistics
+        statistics_list = self.path_obj.children[0].statistic_groups[group_name].statistics
         statistics_dict = {statistic.name: [] for statistic in statistics_list}
         return statistics_dict
 
     def populate_statistics_dict(self, statistics_dict, group_name):
-        for file in self.path_obj.files:
-            for statistic in file.statistic_groups[group_name].statistics:
+        for child in self.path_obj.children:
+            for statistic in child.statistic_groups[group_name].statistics:
                 statistics_dict[statistic.name].append(statistic)
         return statistics_dict
 
@@ -62,6 +64,10 @@ class StatisticsGroup():
         
     def get_statistic_mean(self, statistic_list):
         pass
+
+    def set_output_values(self):
+        for statistic in self.statistics:
+            statistic.set_output_value()
 
     def __str__(self):
         string = (f"Name: {self.name}\n"
