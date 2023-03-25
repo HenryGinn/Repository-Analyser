@@ -1,22 +1,27 @@
 class Statistic():
 
-    def __init__(self, repo, path_obj, name, statistic_type):
-        self.repo = repo
+    def __init__(self, path_obj, name, statistic_type):
+        self.repo = path_obj.repo
         self.path_obj = path_obj
         self.name = name
         self.type = statistic_type
+        self.set_compute_folder_statistic_functions()
 
-    def compute_folder_statistic(self):
-        functions = self.get_compute_folder_statistic_functions()
-        functions[self.type]()
+    def set_statistic_from_statistic_list(self, statistic_list):
+        self.functions[self.type](statistic_list)
 
-    def get_compute_folder_statistic_functions(self):
-        function = {"Sum": self.folder_statistic_sum,
-                    "Mean": self.folder_statistic_mean}
-        return functions
+    def set_compute_folder_statistic_functions(self):
+        self.functions = {"Sum": self.folder_statistic_sum,
+                          "Mean": self.folder_statistic_mean}
 
-    def folder_statistic_sum(self):
-        pass
+    def folder_statistic_sum(self, statistic_list):
+        self.sum = sum([statistic.sum for statistic in statistic_list])
+        
+    def folder_statistic_mean(self, statistic_list):
+        print("Mean")
 
-    def folder_statistic_mean(self):
-        pass
+    def __str__(self):
+        string = (f"Statistic name: {self.name}\n"
+                  f"Statistic type: {self.type}\n"
+                  f"Path name: {self.path_obj.name}\n")
+        return string

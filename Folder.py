@@ -1,4 +1,5 @@
 from Path import Path
+from StatisticGroupFolder import StatisticGroupFolder
 from Utils import get_string_list
 
 class Folder(Path):
@@ -23,12 +24,16 @@ class Folder(Path):
             file.create_summary_statistics()
 
     def set_folder_summary_statistics(self):
+        self.statistic_groups = []
         self.set_line_count_statistics()
 
     def set_line_count_statistics(self):
-        self.total_line_count = sum([file.total_line_count for file in self.files])
-        self.blank_line_count = sum([file.blank_line_count for file in self.files])
-        self.non_blank_line_count = self.total_line_count - self.blank_line_count
+        line_count_statistics = StatisticGroupFolder(self, "Line Count")
+        line_count_statistics.paths_statistics = [file.line_count_statistic
+                                                  for file in self.files]
+        line_count_statistics.paths_statistics += [folder.line_count_statistic
+                                                   for folder in self.child_folders]
+        line_count_statistics.process_paths_statistics()
 
     def write_to_statistics_file(self, statistics_file):
         statistics_file.writelines(f"{self.indented_string}\n")
