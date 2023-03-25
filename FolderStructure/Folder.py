@@ -1,5 +1,4 @@
-from Path import Path
-from StatisticGroupFolder import StatisticGroupFolder
+from FolderStructure.Path import Path
 from Utils import get_string_list
 
 class Folder(Path):
@@ -9,6 +8,7 @@ class Folder(Path):
         self.set_path_history()
         self.child_folders = []
         self.files = []
+        self.children = []
 
     def create_summary_statistics(self):
         self.set_sub_folder_summary_statistics()
@@ -25,15 +25,25 @@ class Folder(Path):
 
     def set_folder_summary_statistics(self):
         self.statistic_groups = []
-        self.set_line_count_statistics()
+        self.set_folder_summary_statistics_from_files()
+        self.set_folder_summary_statistics_from_child_folders()
 
-    def set_line_count_statistics(self):
-        line_count_statistics = StatisticGroupFolder(self, "Line Count")
-        line_count_statistics.paths_statistics = [file.line_count_statistic
-                                                  for file in self.files]
-        line_count_statistics.paths_statistics += [folder.line_count_statistic
-                                                   for folder in self.child_folders]
-        line_count_statistics.process_paths_statistics()
+    def set_folder_summary_statistics_from_files(self):
+        if len(self.files) > 0:
+            self.statistic_groups += [self.get_statistic_group_file_obj(statistics_group_file)
+                                      for statistics_group_file in self.files[0].statistic_groups.values()]
+
+    def get_statistic_group_from_files(self, statistics_group_file):
+        self.statistics_group = statistics_group_file.__class__(self)
+        self.statistics_group.generate_from_folder(statistics_group_file.name)
+
+    def set_folder_summary_statistics_from_child_folders(self):
+        if len(self.child_folders) > 0:
+            self.statistic_groups += [self.get_statistic_group_folder_obj(statistics_group_child_folder)
+                                      for statistics_group_file in self.child_folders[0].statistic_groups.values()]
+
+    def get_statistic_group_folder_obj(self, statistics_group_child_folder):
+        pass
 
     def write_to_statistics_file(self, statistics_file):
         statistics_file.writelines(f"{self.indented_string}\n")
@@ -49,7 +59,7 @@ class Folder(Path):
             folder.write_to_statistics_file(statistics_file)
 
     def __str__(self):
-        string = (f"\nPath: {self.path}, Level: {self.level}\n"
+        string = (f"Path: {self.path}, Level: {self.level}\n"
                   f"Child Folders: {get_string_list(self.child_folder_paths)}\n"
-                  f"Files: {get_string_list(self.files)}")
+                  f"Files: {get_string_list(self.files)}\n")
         return string

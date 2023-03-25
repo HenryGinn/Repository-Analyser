@@ -1,5 +1,5 @@
-from StatisticGroup import StatisticGroup
-from Statistic import Statistic
+from FolderStructure.StatisticGroup import StatisticGroup
+from FolderStructure.Statistic import Statistic
 
 class StatisticGroupFolder(StatisticGroup):
 

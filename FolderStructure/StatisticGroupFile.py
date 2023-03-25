@@ -1,4 +1,4 @@
-from StatisticGroup import StatisticGroup
+from FolderStructure.StatisticGroup import StatisticGroup
 
 class StatisticGroupFile(StatisticGroup):
 

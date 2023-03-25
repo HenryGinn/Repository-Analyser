@@ -1,8 +1,8 @@
 import os
 import sys
 
-from Folder import Folder
-from File import File
+from FolderStructure.Folder import Folder
+from FolderStructure.File import File
 
 class Repo():
 
