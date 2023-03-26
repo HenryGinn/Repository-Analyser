@@ -7,7 +7,6 @@ from FolderStructure.File import File
 class Repo():
 
     space = "  "
-    column_width = 6
 
     def __init__(self, path):
         self.path = path
@@ -127,7 +126,7 @@ class Repo():
 
     def write_statistic_column_header(self, statistic_group_name, statistics_file):
         for statistic in self.base_folder.statistic_groups[statistic_group_name].statistics:
-            column_width = max(len(statistic.name) + 1, self.column_width)
+            column_width = max(len(statistic.name) + 1, statistic.min_column_width)
             indent = (column_width - len(statistic.name)) * " "
             statistics_file.writelines(f"{indent}{statistic.name}")
         statistics_file.writelines("\n")

@@ -10,17 +10,12 @@ class Folder(Path):
         self.files = []
 
     def create_summary_statistics(self):
-        self.set_sub_folder_summary_statistics()
-        self.set_file_summary_statistics()
+        self.set_child_summary_statistics()
         self.set_folder_summary_statistics()
     
-    def set_sub_folder_summary_statistics(self):
-        for folder in self.child_folders:
-            folder.create_summary_statistics()
-
-    def set_file_summary_statistics(self):
-        for file in self.files:
-            file.create_summary_statistics()
+    def set_child_summary_statistics(self):
+        for child in self.children:
+            child.create_summary_statistics()
 
     def set_folder_summary_statistics(self):
         self.statistic_groups = {child_statistics_group.name: self.get_statistic_group_from_child_statistics_group(child_statistics_group)

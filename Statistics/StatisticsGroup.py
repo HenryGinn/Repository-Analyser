@@ -27,7 +27,8 @@ class StatisticsGroup():
 
     def set_statistic_functions_type_dict(self):
         self.statistic_functions_type_dict = {"Sum": self.get_statistic_sum,
-                                              "Mean": self.get_statistic_mean}
+                                              "Mean": self.get_statistic_mean,
+                                              "Percentage": self.get_statistic_percentage}
 
     def get_statistics_dict(self, group_name):
         statistics_dict = self.initialise_statistics_dict(group_name)
@@ -64,6 +65,13 @@ class StatisticsGroup():
         
     def get_statistic_mean(self, statistic_list):
         pass
+
+    def get_statistic_percentage(self, statistic_list):
+        name = statistic_list[0].name
+        new_statistic = Statistic(self.path_obj, name, "Percentage")
+        new_statistic.total = sum([statistic.total for statistic in statistic_list])
+        new_statistic.partial = sum([statistic.partial for statistic in statistic_list])
+        return new_statistic
 
     def set_output_values(self):
         for statistic in self.statistics:

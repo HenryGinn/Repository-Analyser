@@ -2,6 +2,7 @@ import os
 
 from FolderStructure.Path import Path
 from Statistics.LineCount import LineCount
+from Statistics.IndentationLevel import IndentationLevel
 
 class File(Path):
 
@@ -22,7 +23,7 @@ class File(Path):
             self.file_contents = [line.strip("\n") for line in file]
 
     def set_statistic_group_classes(self):
-        self.statistic_group_classes = [LineCount]
+        self.statistic_group_classes = [LineCount, IndentationLevel]
 
     def generate_statistics(self):
         self.statistic_groups = {group_class.name: self.generate_statistic_group(group_class)
