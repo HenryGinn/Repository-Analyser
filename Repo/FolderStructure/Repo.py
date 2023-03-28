@@ -12,7 +12,6 @@ class Repo():
         self.path = path
         self.repo_name = os.path.basename(path)
         self.set_files_and_folders()
-        self.create_results_folders()
 
     def set_files_and_folders(self):
         self.set_files()
