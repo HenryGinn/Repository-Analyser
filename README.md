@@ -8,7 +8,7 @@
 
 ## Overview
 
-This program collects statistics and produces infographics about all python projects within a folder. A project is identified as a folder with a README file, and any deeper level READMEs will be classed as part of the same project.
+This program collects statistics and produces infographics about all python projects within a folder. A project counts as the contents of any folder that contains a README document, or any folder with files in it (not including files further down in the folder structure)
 
 It produces a results folder with two sub folders. The first of these contains a file for each statistic tracked, and in each file, only the statistics for the whole repository will be shown. The second folder will have the results for each of each repository in detail, and these will be organised within the same folder structure as the original catalogue.
 

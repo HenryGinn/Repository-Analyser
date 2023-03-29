@@ -1,4 +1,4 @@
-from Statistics.Statistic import Statistic
+from Repo.Statistics.Statistic import Statistic
 from Utils import get_string_list
 
 class StatisticsGroup():

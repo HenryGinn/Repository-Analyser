@@ -1,8 +1,8 @@
 import os
 import sys
 
-from FolderStructure.Folder import Folder
-from FolderStructure.File import File
+from Repo.FolderStructure.Folder import Folder
+from Repo.FolderStructure.File import File
 
 class Repo():
 
@@ -16,6 +16,8 @@ class Repo():
     def set_files_and_folders(self):
         self.set_files()
         self.set_folders()
+
+    def setup_repository(self):
         self.set_path_structure()
         self.set_max_name_width()
         self.base_folder.update_indented_strings()

@@ -1,8 +1,7 @@
 import math
-from itertools import pairwise
 
-from Statistics.StatisticsGroup import StatisticsGroup
-from Statistics.Statistic import Statistic
+from Repo.Statistics.StatisticsGroup import StatisticsGroup
+from Repo.Statistics.Statistic import Statistic
 
 class IndentationLevel(StatisticsGroup):
 

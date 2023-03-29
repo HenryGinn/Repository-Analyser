@@ -1,4 +1,4 @@
-from FolderStructure.Path import Path
+from Repo.FolderStructure.Path import Path
 from Utils import get_string_list
 
 class Folder(Path):

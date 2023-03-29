@@ -1,8 +1,8 @@
 import os
 
-from FolderStructure.Path import Path
-from Statistics.LineCount import LineCount
-from Statistics.IndentationLevel import IndentationLevel
+from Repo.FolderStructure.Path import Path
+from Repo.Statistics.LineCount import LineCount
+from Repo.Statistics.IndentationLevel import IndentationLevel
 
 class File(Path):
 
