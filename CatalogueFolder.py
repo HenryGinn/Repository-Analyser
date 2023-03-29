@@ -5,6 +5,7 @@ class CatalogueFolder():
     def __init__(self, catalogue, path):
         self.catalogue = catalogue
         self.path = path
+        self.name = os.path.basename(path)
         self.children = []
         self.repositories = []
         self.contains_repositories = False
