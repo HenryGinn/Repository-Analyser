@@ -20,18 +20,21 @@ class Statistic():
 
     def set_output_value_sum(self):
         self.value = self.sum
+        self.value_string = str(self.sum)
 
     def set_output_value_mean(self):
         self.value = None
+        self.value_string = str(self.value)
 
     def set_output_value_percentage(self):
-        self.value = f"{round(100 * self.partial / self.total, 1)}%"
+        self.value = round(100 * self.partial / self.total, 1)
+        self.value_string = f"{self.value}%"
 
     def set_output_string(self):
         column_width = max(self.min_column_width, len(self.name) + 1)
-        indent_length = column_width - len(str(self.value))
+        indent_length = column_width - len(self.value_string)
         indent = indent_length * " "
-        self.output_string = f"{indent}{self.value}"
+        self.output_string = f"{indent}{self.value_string}"
 
     def __str__(self):
         string = (f"Statistic name: {self.name}\n"

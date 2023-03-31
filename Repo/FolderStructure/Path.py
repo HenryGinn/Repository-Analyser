@@ -1,4 +1,5 @@
 import os
+from Repo.FolderStructure.Infographic import Infographic
 
 class Path():
 
@@ -36,3 +37,7 @@ class Path():
         for statistic in self.statistic_groups[statistic_group_name].statistics:
             statistics_file.writelines(statistic.output_string)
         statistics_file.writelines("\n")
+
+    def create_infographics(self):
+        self.infographic = Infographic(self)
+        self.infographic.create_infographic()

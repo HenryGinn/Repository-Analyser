@@ -1,6 +1,8 @@
 import os
 import sys
 
+sys.path.append("..")
+
 from Repo.FolderStructure.Folder import Folder
 from Repo.FolderStructure.File import File
 
@@ -9,9 +11,14 @@ class Repo():
     space = "  "
 
     def __init__(self, path):
-        self.path = path
+        self.process_path(path)
         self.repo_name = os.path.basename(path)
         self.set_files_and_folders()
+
+    def process_path(self, path):
+        if not os.path.exists(path):
+            raise ValueError(f"Path does not exist: {path}")
+        self.path = path
 
     def set_files_and_folders(self):
         self.set_files()
@@ -82,7 +89,7 @@ class Repo():
 
     def set_parent_results_path(self):
         script_path = sys.path[0]
-        parent_path = os.path.dirname(script_path)
+        parent_path = os.path.dirname(os.path.dirname(script_path))
         self.parent_results_path = os.path.join(parent_path, "Results")
         self.create_parent_results_folder()
 
@@ -104,6 +111,7 @@ class Repo():
     def create_statistics(self):
         self.base_folder.create_summary_statistics()
         self.create_statistics_files()
+        self.create_infographics()
 
     def create_statistics_files(self):
         for statistic_group_name in self.base_folder.statistic_groups:
@@ -131,6 +139,18 @@ class Repo():
             indent = (column_width - len(statistic.name)) * " "
             statistics_file.writelines(f"{indent}{statistic.name}")
         statistics_file.writelines("\n")
+
+    def create_infographics(self):
+        self.create_infographics_folders()
+        self.create_infographics_files()
+
+    def create_infographics_folders(self):
+        for folder in self.folders:
+            folder.create_infographics()
+
+    def create_infographics_files(self):
+        for file in self.files:
+            file.create_infographics()
         
     def output_files(self):
         print("\nOutputting files")
