@@ -1,10 +1,11 @@
 class Line():
 
     def __init__(self, x_values, y_values, label=None,
-                 colour=None, marker=None, linestyle=None):
+                 colour=None, marker=None, linestyle=None, angle=60):
         self.set_values(x_values, y_values)
         self.label = label
         self.set_line_properties(colour, marker, linestyle)
+        self.angle = angle
 
     def set_values(self, x_values, y_values):
         self.x_values = x_values

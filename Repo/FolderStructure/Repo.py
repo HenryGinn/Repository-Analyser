@@ -5,6 +5,7 @@ sys.path.append("..")
 
 from Repo.FolderStructure.Folder import Folder
 from Repo.FolderStructure.File import File
+from Repo.Infographics.InfographicFile import InfographicFile
 
 class Repo():
 
@@ -141,16 +142,22 @@ class Repo():
         statistics_file.writelines("\n")
 
     def create_infographics(self):
-        self.create_infographics_folders()
-        self.create_infographics_files()
+        #self.create_infographics_by_group_folders()
+        #self.create_infographics_by_group_files()
+        self.create_infographics_by_file()
 
-    def create_infographics_folders(self):
+    def create_infographics_by_group_folders(self):
         for folder in self.folders:
-            folder.create_infographics()
+            folder.create_infographics_by_group()
 
-    def create_infographics_files(self):
+    def create_infographics_by_group_files(self):
         for file in self.files:
-            file.create_infographics()
+            file.create_infographics_by_group()
+
+    def create_infographics_by_file(self):
+        for statistic_group in self.base_folder.statistic_groups:
+            infographic_by_file = InfographicFile(self, statistic_group)
+            infographic_by_file.create_infographic()
         
     def output_files(self):
         print("\nOutputting files")
