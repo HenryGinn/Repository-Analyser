@@ -23,6 +23,7 @@ class InfographicGroup():
         line_objects = [self.get_line_obj(statistic_group)]
         lines_obj = Lines(line_objects, "Qualitative", "bar")
         lines_obj.title = statistic_group.name
+        lines_obj.y_label = {"Sum": None, "Mean": "Average", "Percentage": "%"}[statistic_group.statistics[0].type]
         return lines_obj
 
     def get_line_obj(self, statistic_group):
