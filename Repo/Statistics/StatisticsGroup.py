@@ -74,6 +74,12 @@ class StatisticsGroup():
         for statistic in self.statistics:
             statistic.set_output_value()
 
+    def get_trivial_percentage_statistic(self, statistic_name):
+        statistic = Statistic(self.path_obj, statistic_name, "Percentage")
+        statistic.partial = 0
+        statistic.total = 0
+        return statistic
+
     def __str__(self):
         string = (f"Name: {self.name}\n"
                   f"Associated path name: {self.path_obj.name}\n"

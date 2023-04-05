@@ -142,9 +142,9 @@ class Repo():
         statistics_file.writelines("\n")
 
     def create_infographics(self):
-        #self.create_infographics_by_group_folders()
-        #self.create_infographics_by_group_files()
-        self.create_infographics_by_file()
+        self.create_infographics_by_group_folders()
+        self.create_infographics_by_group_files()
+        #self.create_infographics_by_file()
 
     def create_infographics_by_group_folders(self):
         for folder in self.folders:

@@ -27,7 +27,10 @@ class Statistic():
         self.value_string = str(self.value)
 
     def set_output_value_percentage(self):
-        self.value = round(100 * self.partial / self.total, 1)
+        if self.total != 0:
+            self.value = round(100 * self.partial / self.total, 1)
+        else:
+            self.value = 0
         self.value_string = f"{self.value}%"
 
     def set_output_string(self):
