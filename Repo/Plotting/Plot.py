@@ -170,8 +170,8 @@ class Plot():
 
     def set_figure_size(self):
         mng = plt.get_current_fig_manager()
-        #mng.resize(*mng.window.maxsize())
-        mng.window.fullscreen()
+        mng.resize(*mng.window.maxsize())
+        #mng.window.fullscreen()
 
     def adjust_layout(self):
         if self.layouts["Adjust"]:
